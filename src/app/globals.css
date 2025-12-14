@@ -42,3 +42,19 @@ body {
 .delay-500 {
   animation-delay: 500ms;
 }
+
+/* Install prompt animation */
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s ease-out forwards;
+}

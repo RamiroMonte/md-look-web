@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { InstallPrompt } from "@/components/InstallPrompt";
 
 export const metadata: Metadata = {
   title: "MD-Look - Planejamento de Looks",
@@ -38,6 +39,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased min-h-screen">
         {children}
+        <InstallPrompt />
       </body>
     </html>
   );
