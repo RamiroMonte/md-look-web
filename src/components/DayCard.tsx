@@ -26,8 +26,12 @@ export function DayCard({ day, onAddLook, onRemoveLook, onEditDay, onViewLook }:
   };
 
   const handleCaptureComplete = (imageData: string) => {
-    onAddLook(day.id, captureLookType, imageData);
+    // Fecha a câmera primeiro para garantir que o modal sai da tela
     setShowCamera(false);
+    // Depois salva a imagem
+    setTimeout(() => {
+      onAddLook(day.id, captureLookType, imageData);
+    }, 100);
   };
 
   return (

@@ -81,8 +81,11 @@ export function CameraCapture({ onCapture, onClose }: CameraCaptureProps) {
 
   const confirm = () => {
     if (capturedImage) {
+      // Para o stream da câmera antes de fechar
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
       onCapture(capturedImage);
-      onClose();
     }
   };
 
@@ -103,9 +106,9 @@ export function CameraCapture({ onCapture, onClose }: CameraCaptureProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black z-50 flex flex-col h-screen">
+    <div className="fixed inset-0 bg-black z-50 flex flex-col" style={{ height: '100dvh' }}>
       {/* Header - fixed height */}
-      <div className="flex-shrink-0 flex items-center justify-between p-4 bg-black/50 z-10">
+      <div className="flex-shrink-0 flex items-center justify-between p-4 bg-black/50 z-10 pt-[env(safe-area-inset-top)]">
         <button onClick={onClose} className="text-white p-2">
           <X className="w-6 h-6" />
         </button>
@@ -115,8 +118,8 @@ export function CameraCapture({ onCapture, onClose }: CameraCaptureProps) {
         </button>
       </div>
 
-      {/* Camera view - fills remaining space */}
-      <div className="flex-1 relative overflow-hidden min-h-0">
+      {/* Camera view - max 70% height */}
+      <div className="relative overflow-hidden min-h-0" style={{ height: '65%' }}>
         {capturedImage ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -148,8 +151,14 @@ export function CameraCapture({ onCapture, onClose }: CameraCaptureProps) {
         <canvas ref={canvasRef} className="hidden" />
       </div>
 
-      {/* Controls - fixed height */}
-      <div className="flex-shrink-0 p-6 bg-black/80 flex items-center justify-center gap-8 z-10">
+      {/* Spacer */}
+      <div className="flex-1" />
+
+      {/* Controls - fixed at bottom with safe area */}
+      <div
+        className="flex-shrink-0 p-6 bg-black/80 flex items-center justify-center gap-8 z-10"
+        style={{ paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom))' }}
+      >
         {capturedImage ? (
           <>
             <button
