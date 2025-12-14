@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
     title: "MD-Look",
   },
   formatDetection: {
@@ -34,7 +34,7 @@ export default function RootLayout({
       <head>
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="theme-color" content="#f97316" />
       </head>
       <body className="antialiased min-h-screen">
